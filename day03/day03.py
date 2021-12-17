@@ -10,7 +10,7 @@ def main():
      numberOfLines = len(input)
      counters = [[0, 0] for _ in range(len(input[0]))]
 
-     #determines the most common bit in each position
+     #counts the most common bit in each position
      j = 0
      while j < len(input[0]):
           i = 0
@@ -21,6 +21,30 @@ def main():
                     counters[j][1] += 1
                i += 1
           j += 1
+
+     gammaRate = '0'
+     epsilonRate = '1'
+
+     #determines which bit is most common in the first position
+     if counters[0][0] < counters[0][1]:
+          gammaRate = '1'
+          epsilonRate = '0'
+
+     i = 1
+     while i < len(counters):
+          if counters[i][0] < counters[i][1]:
+               gammaRate += '1'
+               epsilonRate += '0'
+          else:
+               gammaRate += '0'
+               epsilonRate += '1'
+          i += 1
+
+     #convert gamma and epsilon to decimal
+     gammaRate = int(gammaRate, 2)
+     epsilonRate = int(epsilonRate, 2)
+
+     print(f'The answer is: {gammaRate * epsilonRate}')
 
 if __name__ == '__main__':
      main()
